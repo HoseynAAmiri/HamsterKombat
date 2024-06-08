@@ -23,9 +23,10 @@ def preprocess_data(data):
 # Estimate cumulative cost based on a multiplier
 def estimate_cumulative_cost(row, multiplier=1.5):
     level = row['Level']
-    initial_cost = row['Price-to-upgrade'] / (multiplier ** (level - 1))
+    initial_cost = int(row['Price-to-upgrade']) / \
+        (multiplier ** (int(level) - 1))
     cumulative_cost = sum(initial_cost * (multiplier ** i)
-                          for i in range(level))
+                          for i in range(int(level)))
     return int(cumulative_cost)
 
 
