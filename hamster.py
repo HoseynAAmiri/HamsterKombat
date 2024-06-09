@@ -51,8 +51,8 @@ def calculate_npv(data, discount_rate=0.1, time_period=10):
 
 # Calculate Efficiency
 def calculate_efficiency(data):
-    data['Efficiency'] = np.round(
-        np.log10(data['Upgrade PPH'] / data['Upgrade price']), 3)
+    efficiency = np.log10(data['Upgrade PPH'] / data['Upgrade price'])
+    data['Efficiency'] = np.round(efficiency / np.mean(efficiency), 3)
     return data
 
 
