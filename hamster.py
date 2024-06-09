@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 
 # Load the initial data
-file_path = './hamster.csv'
+file_path = './my_hamster.csv'
 data = pd.read_csv(file_path)
 
 
