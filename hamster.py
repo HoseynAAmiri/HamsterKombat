@@ -13,9 +13,9 @@ data = pd.read_csv(file_path)
 def preprocess_data(data):
     data['Current PPH'] = data['Current PPH'].replace(
         '[\$,]', '', regex=True).astype(float)
-    data['Price-to-upgrade'] = data['Price-to-upgrade'].replace(
+    data['Upgrade price'] = data['Upgrade price'].replace(
         '[\$,]', '', regex=True).astype(float)
-    data['Added PPH'] = data['Added PPH'].replace(
+    data['Upgrade PPH'] = data['Upgrade PPH'].replace(
         '[\$,]', '', regex=True).astype(float)
     return data
 
@@ -23,7 +23,7 @@ def preprocess_data(data):
 # Estimate cumulative cost based on a multiplier
 def estimate_cumulative_cost(row, multiplier=1.5):
     level = row['Level']
-    initial_cost = int(row['Price-to-upgrade']) / \
+    initial_cost = int(row['Upgrade price']) / \
         (multiplier ** (int(level) - 1))
     cumulative_cost = sum(initial_cost * (multiplier ** i)
                           for i in range(int(level)))
@@ -43,7 +43,7 @@ def calculate_npv(data, discount_rate=0.1, time_period=10):
         cash_flows = [(row['Current PPH'] * 24 * 365) / ((1 + discount_rate) ** t)
                       for t in range(1, time_period + 1)]
         npv = sum(cash_flows) - \
-            (row['Cumulative Cost'] + row['Price-to-upgrade'])
+            (row['Cumulative Cost'] + row['Upgrade price'])
         npvs.append(int(npv))
     data['NPV'] = npvs
     return data
@@ -52,14 +52,14 @@ def calculate_npv(data, discount_rate=0.1, time_period=10):
 # Calculate Efficiency
 def calculate_efficiency(data):
     data['Efficiency'] = np.round(
-        np.log10(data['Added PPH'] / data['Price-to-upgrade']), 3)
+        np.log10(data['Upgrade PPH'] / data['Upgrade price']), 3)
     return data
 
 
 # Combined metric of NPV and Efficiency
 def combined_metric(data):
     data['Combined Metric'] = np.round(
-        data['NPV'] * 10 ** data['Efficiency'], 1)
+        data['NPV'] * 10 ** data['Efficiency'], 0)
     return data
 
 
