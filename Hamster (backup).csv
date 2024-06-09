@@ -1,4 +1,4 @@
-Category,No.,Name,Level,Current PPH,Price-to-upgrade,Added PPH,Cumulative Cost,NPV,Efficiency,Combined Metric
+Category,No.,Name,Level,Current PPH,Upgrade price,Upgrade PPH,Cumulative Cost,NPV,Efficiency,Combined Metric
 Legal,1,KYC,15,251,72530,28,217093,13220805,-3.413,5108.1
 Legal,2,KYB,7,520,2750,96,7767,27979215,-1.457,976867.2
 Legal,3,Legal opinion,7,520,5510,96,15562,27968660,-1.759,487160
