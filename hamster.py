@@ -12,16 +12,16 @@ data = pd.read_csv(file_path)
 # Preprocess the data
 def preprocess_data(data):
     data['Current PPH'] = data['Current PPH'].replace(
-        '[\$,]', '', regex=True).astype(float)
+        '[\$,]', '', regex=True).astype(int)
     data['Upgrade price'] = data['Upgrade price'].replace(
-        '[\$,]', '', regex=True).astype(float)
+        '[\$,]', '', regex=True).astype(int)
     data['Upgrade PPH'] = data['Upgrade PPH'].replace(
-        '[\$,]', '', regex=True).astype(float)
+        '[\$,]', '', regex=True).astype(int)
     return data
 
 
 # Estimate cumulative cost based on a multiplier
-def estimate_cumulative_cost(row, multiplier=1.5):
+def estimate_cumulative_cost(row, multiplier):
     level = row['Level']
     initial_cost = int(row['Upgrade price']) / \
         (multiplier ** (int(level) - 1))
