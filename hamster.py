@@ -11,12 +11,9 @@ data = pd.read_csv(file_path)
 
 # Preprocess the data
 def preprocess_data(data):
-    data['Current PPH'] = data['Current PPH'].replace(
-        '[\$,]', '', regex=True).astype(int)
-    data['Upgrade price'] = data['Upgrade price'].replace(
-        '[\$,]', '', regex=True).astype(int)
-    data['Upgrade PPH'] = data['Upgrade PPH'].replace(
-        '[\$,]', '', regex=True).astype(int)
+    data['Current PPH'] = data['Current PPH'].astype(int)
+    data['Upgrade price'] = data['Upgrade price'].astype(int)
+    data['Upgrade PPH'] = data['Upgrade PPH'].astype(int)
     return data
 
 
