@@ -6,7 +6,6 @@ import pandas as pd
 # Load the initial data
 file_path = './hamster.csv'
 data = pd.read_csv(file_path)
-# data = pd.read_excel('./Hamster.xlsx')
 
 
 # Preprocess the data
