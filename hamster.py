@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 
 # Load the initial data
-file_path = './Hamster.csv'
+file_path = './hamster.csv'
 data = pd.read_csv(file_path)
 # data = pd.read_excel('./Hamster.xlsx')
 
@@ -44,8 +44,8 @@ def calculate_npv(data, discount_rate=0.1, time_period=10):
                       for t in range(1, time_period + 1)]
         npv = sum(cash_flows) - \
             (row['Cumulative Cost'] + row['Upgrade price'])
-        npvs.append(int(npv))
-    data['NPV'] = npvs
+        npvs.append(npv)
+    data['NPV'] = np.round(np.array(npvs) / np.mean(npvs), 2)
     return data
 
 
@@ -58,8 +58,8 @@ def calculate_efficiency(data):
 
 # Combined metric of NPV and Efficiency
 def combined_metric(data):
-    data['Combined Metric'] = np.round(
-        data['NPV'] * 10 ** data['Efficiency'], 0)
+    combined = data['NPV'] * 10 ** data['Efficiency']
+    data['Combined Metric'] = np.round(np.log10(combined), 3)
     return data
 
 
